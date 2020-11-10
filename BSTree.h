@@ -16,6 +16,11 @@ class BSTree
         ~BSTree();
 
         void add(valueType data);
+        void remove(valueType toRemove);
+
+        void search(valueType toFind);
+
+        void max();
 
         valueType out();
         void inOrderTraversal(BTNode<valueType>* traversalRoot);
@@ -24,7 +29,8 @@ class BSTree
 
     void moveRight();
     void moveLeft();
-    void moveUp();
+
+    
  
     valueType getCurrent();
 

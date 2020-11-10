@@ -12,15 +12,25 @@ int main()
 
     tree1.add("test");
     tree1.add("abc");
+    tree1.add("Anothertest");
     tree1.add("zyx");
+    tree1.add("r");
+
 
     std::cout << tree1 << std::endl;
 
-    intTree.add(1);
-    intTree.add(2);
-    intTree.add(3);
-    intTree.add(4);
-    intTree.add(5);
+    tree1.remove("zyx");
+    tree1.remove("abc"); // appears to be working more tests need with pen and paper
 
-    std::cout << intTree << std::endl;
+
+    std::cout << tree1 << std::endl;
+
+
+    /*
+    TODO
+    Overload += for BSTree
+    Fix << overload for BSTree
+    create HTable
+
+    *\
 }

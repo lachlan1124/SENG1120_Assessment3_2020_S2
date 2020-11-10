@@ -9,7 +9,7 @@ class BTNode
 
     public:
 
-    BTNode(valueType nData, BTNode* nLeft = NULL, BTNode* nRight = NULL);
+    BTNode(valueType nData, BTNode* nLeft = NULL, BTNode* nRight = NULL, BTNode* nParent = NULL);
     ~BTNode();
 
     valueType getData();
@@ -19,14 +19,17 @@ class BTNode
 
     BTNode* getRight();
     BTNode* getLeft();
+    BTNode* getParent();
 
     void setRight(BTNode* nRight);
     void setLeft(BTNode* nLeft);
-    
+    void setParent(BTNode* nParent);
+
     private:
     
     BTNode* left;
     BTNode* right;
+    BTNode* parent;
 
     valueType data;
 
