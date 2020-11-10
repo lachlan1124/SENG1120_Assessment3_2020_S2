@@ -31,6 +31,7 @@ class BTNode
     valueType data;
 
 
+
 };
 
 #include "BTNode.hpp"

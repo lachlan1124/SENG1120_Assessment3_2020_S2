@@ -18,6 +18,7 @@ class BSTree
         void add(valueType data);
 
         valueType out();
+        void inOrderTraversal(BTNode<valueType>* traversalRoot);
 
     private:
 
@@ -26,6 +27,7 @@ class BSTree
     void moveUp();
  
     valueType getCurrent();
+
 
     BTNode<valueType>* root;
     BTNode<valueType>* current;

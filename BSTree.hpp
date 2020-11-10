@@ -80,14 +80,24 @@ template<typename valueType> valueType BSTree<valueType>::getCurrent()
     return current->getData();
 }
 
+template<typename valueType> void BSTree<valueType>::inOrderTraversal(BTNode<valueType>* traversalRoot)
+{
+    if(traversalRoot != NULL)
+    {
+        inOrderTraversal(traversalRoot->getLeft());
+        std::cout << traversalRoot->getData() << " "; 
+        inOrderTraversal(traversalRoot->getRight());
+    }
+
+} 
+
 template<typename valueType> valueType BSTree<valueType>::out()
 {
     valueType output;
     // go to the bottom of the left sub tree
-    while(!current->getLeft()->isLeftNULL())
-            moveLeft();
-    
-    output = output + getCurrent();
+
+    current = root;
+    inOrderTraversal(current);
 
 
 
