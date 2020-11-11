@@ -155,6 +155,7 @@ template<typename valueType> void BSTree<valueType>::remove(valueType toRemove)
             }
 
             delete current; // delete item
+            current = root;
             size--;
             
             break;
@@ -165,7 +166,7 @@ template<typename valueType> void BSTree<valueType>::remove(valueType toRemove)
                 if(root->getLeft() != NULL)
                     root = root->getLeft();
                 else if(root->getRight() != NULL)
-                    root = root->getLeft();
+                    root = root->getRight();
 
                 root->setParent(NULL); // set the new root parent to NULL
 
@@ -194,6 +195,7 @@ template<typename valueType> void BSTree<valueType>::remove(valueType toRemove)
             }
             
             delete current; // delete item
+            current = root;
             size--;
 
             break;

@@ -8,7 +8,12 @@ template<typename valueType> BTNode<valueType>::BTNode(valueType nData, BTNode* 
     parent = nParent;
 }
 
-template<typename valueType> BTNode<valueType>::~BTNode() {}
+template<typename valueType> BTNode<valueType>::~BTNode() 
+{
+    parent = NULL;
+    left = NULL;
+    right = NULL;
+}
 
 template<typename valueType> valueType BTNode<valueType>::getData()
 {
