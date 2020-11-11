@@ -87,7 +87,6 @@ template<typename valueType> valueType BSTree<valueType>::getCurrent()
 
 template<typename valueType> bool BSTree<valueType>::search(valueType toFind)
 {
-
     if(current != NULL)
     {
         if(current->getData() == toFind)
@@ -108,9 +107,6 @@ template<typename valueType> bool BSTree<valueType>::search(valueType toFind)
     {
         return false;
     }
-    
-
-
 }
 
 template<typename valueType> void BSTree<valueType>::max()
@@ -145,10 +141,21 @@ template<typename valueType> void BSTree<valueType>::remove(valueType toRemove)
             if(isRoot) // if is root
             {
                 root = NULL;
-                delete current; // delete root
-                size--;
+            }
+            else
+            {
+                if(current->getParent()->getRight() == current) // if on the right
+                {
+                    current->getParent()->setRight(NULL); // set parent right to NULL
+                }
+                else if(current->getParent()->getLeft() == current) // if on the left
+                {   
+                    current->getParent()->setLeft(NULL); // set parent left to NULL
+                }  
             }
 
+            delete current; // delete root
+            size--;
             
             break;
         case 1:

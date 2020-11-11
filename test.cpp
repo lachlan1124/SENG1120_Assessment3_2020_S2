@@ -45,9 +45,29 @@ int main()
     std::cout << "1. Before remove: " << removeTest << std::endl;
     removeTest.remove("Jeff");
     
-    std::cout << "1. After remove:" << removeTest << std::endl;
+    std::cout << "1. After remove: " << removeTest << std::endl;
 
 
+    std::cout << "TEST 2" << std::endl;
+
+    removeTest.add("Jeff");
+    removeTest.add("Alice");
+    removeTest.add("Lachlan");
+    removeTest.add("Beth");
+
+    std::cout << "2. Before remove: " << removeTest << std::endl;
+
+    removeTest.remove("Lachlan");
+    std::cout << "2. After remove(Lachlan): " << removeTest << std::endl;
+
+    removeTest.remove("Beth");
+    std::cout << "2. After remove(Beth): " << removeTest << std::endl;
+
+    removeTest.remove("Alice");
+    std::cout << "2. After remove(Alice): " << removeTest << std::endl;
+    
+    removeTest.remove("Jeff");
+    std::cout << "2. After remove: " << removeTest << std::endl;
 
     /*
     TODO
