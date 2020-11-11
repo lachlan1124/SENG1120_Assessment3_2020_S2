@@ -1,8 +1,10 @@
 #include "BSTree.h"
 #include "BTNode.h"
+
 #include <cstdarg>
-
-
+#include <iostream>
+#include <string>
+#include <sstream>
 
 template<typename valueType> BSTree<valueType>::BSTree() {size = 0;}
 
@@ -193,35 +195,46 @@ template<typename valueType> void BSTree<valueType>::remove(valueType toRemove)
 }
 
 // CHANGE THIS PASS OS TO THIS FUNCTION
-template<typename valueType> void BSTree<valueType>::inOrderTraversal(BTNode<valueType>* traversalRoot)
+template<typename valueType> void BSTree<valueType>::inOrderTraversal(BTNode<valueType>* traversalRoot, std::ostream& os)
 {
     if(traversalRoot != NULL)
     {
-        inOrderTraversal(traversalRoot->getLeft());
-        std::cout << traversalRoot->getData() << " "; 
-        inOrderTraversal(traversalRoot->getRight());
+        inOrderTraversal(traversalRoot->getLeft(), os);
+        os <<  traversalRoot->getData() << " "; 
+        inOrderTraversal(traversalRoot->getRight(), os);
     }
 
 } 
 
-template<typename valueType> valueType BSTree<valueType>::out()
+template<typename valueType> void BSTree<valueType>::out(std::ostream& os)
 {
-    valueType output;
-    // go to the bottom of the left sub tree
-
     current = root;
-    inOrderTraversal(current);
-
-
-
-    return output;
+    inOrderTraversal(current, os);
 }
 
+template<typename valueType> void BSTree<valueType>::operator+=( BSTree<valueType>& BST)
+{
+ 
+
+    std::stringstream ss;
+
+    ss << BST; // stream data into ss
+
+    while(ss) // while stuff left
+    {
+        valueType item;
+
+        ss >> item;
+
+        add(item); // add items
+    }
+
+
+}
 
 template<typename valueType> std::ostream& operator <<(std::ostream& os, BSTree<valueType> &p)
 {
-   // p.out(os); LIKE THIS NOT LIKE BELOW
-    os << p.out(); // get the cards and the value
-
+    p.out(os);
     return os; // return the stream
 }
+

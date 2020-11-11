@@ -22,8 +22,10 @@ class BSTree
 
         void max();
 
-        valueType out();
-        void inOrderTraversal(BTNode<valueType>* traversalRoot);
+        void out(std::ostream& os);
+        void inOrderTraversal(BTNode<valueType>* traversalRoot, std::ostream& os);
+
+        void operator += ( BSTree<valueType>& BST);
 
     private:
 
