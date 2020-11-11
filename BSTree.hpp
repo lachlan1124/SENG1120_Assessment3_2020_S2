@@ -62,6 +62,8 @@ template<typename valueType> void BSTree<valueType>::add(valueType data)
                 }
                 
             }
+            else if(current->getData() == data) { inserting = false;}
+
         }
         
     }
@@ -94,12 +96,19 @@ template<typename valueType> bool BSTree<valueType>::search(valueType toFind)
         else if(current->getData() > toFind)
         {
             moveLeft();
-            search(toFind);
+            if(!search(toFind))
+                return false;
+            else
+                return true;
+            
         }
         else if(current->getData() < toFind)
         {
             moveRight();
-            search(toFind);
+            if(!search(toFind))
+                return false;
+            else
+                return true;
         }
         
     }
@@ -205,18 +214,15 @@ template<typename valueType> void BSTree<valueType>::remove(valueType toRemove)
             break;
 
         case 2: // if item has two children
-            BTNode<valueType>* tmp = min(current->getRight()); // find the min in the right side of the node to delete
-            valueType data = tmp->getData();
-            remove(tmp->getData());
-            current->setData(data);
+            
+            BTNode<valueType>* tmp = current;
+            valueType data = min(current->getRight())->getData(); // find the min in the right side of the node to delete
+            remove(data);
+            tmp->setData(data);
             break;
         }
 
 
-    }
-    else
-    {
-        std::cout << "Failed to remove item" << std::endl;
     }
        
 }
@@ -252,8 +258,11 @@ template<typename valueType> void BSTree<valueType>::operator+=( BSTree<valueTyp
         valueType item;
 
         ss >> item;
+        if(item == "")
+        {
+            add(item); // add items
+        }
 
-        add(item); // add items
     }
 
 
