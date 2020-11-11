@@ -74,3 +74,8 @@ template<typename valueType> void BTNode<valueType>::setParent(BTNode* nParent)
 {
     parent = nParent;
 }
+
+template<typename valueType> void BTNode<valueType>::setData(valueType nData)
+{
+    data = nData;
+}

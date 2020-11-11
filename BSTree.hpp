@@ -109,13 +109,17 @@ template<typename valueType> bool BSTree<valueType>::search(valueType toFind)
     }
 }
 
-template<typename valueType> void BSTree<valueType>::max()
+template<typename valueType> BTNode<valueType>* BSTree<valueType>::min(BTNode<valueType>* minRoot)
 {
-    if(current->getRight() != NULL)
+    if(minRoot->getLeft() != NULL)
     {
-        moveRight();
-        max();
-    }   
+        minRoot = minRoot->getLeft();
+        min(minRoot);
+    }
+    else
+    {
+        return minRoot;
+    }
 }
 
 
@@ -201,9 +205,10 @@ template<typename valueType> void BSTree<valueType>::remove(valueType toRemove)
             break;
 
         case 2: // if item has two children
-
-            break;
-        default:
+            BTNode<valueType>* tmp = min(current->getRight()); // find the min in the right side of the node to delete
+            valueType data = tmp->getData();
+            remove(tmp->getData());
+            current->setData(data);
             break;
         }
 

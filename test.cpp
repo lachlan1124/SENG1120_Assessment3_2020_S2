@@ -86,13 +86,59 @@ int main()
         removeTest.remove("Lachlan");
     std::cout << "3. After remove(Lachlan): " << removeTest << std::endl;
 
-    removeTest.remove("Beth"); // causing seg fault
+    removeTest.remove("Beth");
     removeTest.remove("Jeff");
     std::cout << "3. After remove(Beth & Jeff): " << removeTest << std::endl;
 
     removeTest.remove("Kat");
 
     std::cout << "3. After remove(all): " << removeTest << std::endl;
+
+
+    clock_t t;
+	BSTree<string> treeValues;
+	BSTree<string> treeAux;
+
+
+	string vectorStudents1[] = {"Alex", "John", "Mary", "Peter" , "Miranda" , "Claudia" , "Sandy" , "Daniel" , "Rick" , "Patricia" , "Adam" , "Bianca" , "Nadia", "Sylvia", "Pamela"};
+	string vectorStudents2[] = {"Travis", "Michelle", "Steve", "Phil", "Hugh", "Oliver", "Kate", "Tim", "David", "Ingrid", "Tom", "Fred", "Bill"};
+	
+	int numberOfElements1 = 15;
+	int numberOfElements2 = 13;
+	
+	cout << "==================" << endl << "BINARY SEARCH TREE" << endl;
+	t = clock(); 																	// gets current time
+	for (int i=0; i<numberOfElements1; i++) {treeValues.add(vectorStudents1[i]);} 	// populates the main tree.
+	for (int i=0; i<numberOfElements2; i++) {treeAux.add(vectorStudents2[i]);} 		// populates the auxiliary tree ***THIS LINE HAS BEEN CORRECTED****
+    	
+	treeValues += treeAux; 															// tests overloaded += concatenation operator
+	
+	cout << "Initial tree: " << treeValues << endl; 								// prints the contents of the tree.
+
+    for (int i=0; i<500000; i++)													// add and remove over and over again
+    { 								
+       	treeValues.remove("Alex");
+		treeValues.remove("Peter");
+		treeValues.remove("John");
+		treeValues.remove("Pamela");
+		treeValues.remove("Kate");
+		treeValues.remove("Tim");
+		treeValues.remove("Steve");
+		treeValues.remove("Rick");
+		treeValues.remove("Sam");
+        treeValues.add("Alex");
+		treeValues.add("Peter");
+		treeValues.add("John");
+		treeValues.add("Pamela");
+		treeValues.add("Kate");
+		treeValues.add("Tim");
+		treeValues.add("Steve");
+		treeValues.add("Rick");
+	}
+	cout << "Final tree  : " << treeValues << endl << endl; 						// prints the contents of the tree.
+	cout << "Time elapsed: " << (clock() - t)/1000.0 << " seconds" << endl; 		// prints elapsed time.
+	cout << "Time per ins/del operation: " << 1000.0*(double)(clock() - t)/(double)(500000*17) << " milliseconds." << endl << endl;
+
 
     /*
     TODO

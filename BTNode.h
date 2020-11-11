@@ -24,7 +24,7 @@ class BTNode
     void setRight(BTNode* nRight);
     void setLeft(BTNode* nLeft);
     void setParent(BTNode* nParent);
-
+    void setData(valueType nData);
     private:
     
     BTNode* left;

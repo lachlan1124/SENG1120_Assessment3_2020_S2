@@ -20,7 +20,7 @@ class BSTree
 
         bool search(valueType toFind);
 
-        void max();
+        BTNode<valueType>* min(BTNode<valueType>* minRoot);
 
         void out(std::ostream& os);
         void inOrderTraversal(BTNode<valueType>* traversalRoot, std::ostream& os);
