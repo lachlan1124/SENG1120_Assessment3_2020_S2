@@ -20,7 +20,10 @@ template<typename valueType> BSTree<valueType>::~BSTree() {}
 template<typename valueType> void BSTree<valueType>::add(valueType data)
 {
     if(size == 0)
+    {
         root = new BTNode<valueType>(data);
+        current = root;
+    }
     else
     {
         bool inserting = true;
@@ -160,7 +163,12 @@ template<typename valueType> void BSTree<valueType>::remove(valueType toRemove)
         }
 
 
-    }    
+    }
+    else
+    {
+        std::cout << "Failed to remove item" << std::endl;
+    }
+       
 }
 
 // CHANGE THIS PASS OS TO THIS FUNCTION

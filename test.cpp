@@ -41,9 +41,11 @@ int main()
     BSTree<string> removeTest;
 
     removeTest.add("Jeff");
+	    
+    std::cout << "1. Before remove: " << removeTest << std::endl;
     removeTest.remove("Jeff");
     
-    std::cout << removeTest << std::endl;
+    std::cout << "1. After remove:" << removeTest << std::endl;
 
 
 
