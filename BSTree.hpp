@@ -154,15 +154,51 @@ template<typename valueType> void BSTree<valueType>::remove(valueType toRemove)
                 }  
             }
 
-            delete current; // delete root
+            delete current; // delete item
             size--;
             
             break;
-        case 1:
+        case 1: // if item has one child
+            if(isRoot)
+            {
+                // change the root to the new root
+                if(root->getLeft() != NULL)
+                    root = root->getLeft();
+                else if(root->getRight() != NULL)
+                    root = root->getLeft();
+
+                root->setParent(NULL); // set the new root parent to NULL
+
+            }
+            else if (current->getParent()->getLeft() == current) // if on the left
+            {
+                // set the parents left to the new left
+                if(current->getLeft() != NULL)
+                    current->getParent()->setLeft(current->getLeft());
+                else if (current->getRight() != NULL)
+                    current->getParent()->setLeft(current->getRight());
+
+                // point parents left to parent
+                current->getParent()->getLeft()->setParent(current->getParent());
+            }
+            else if (current->getParent()->getRight() == current) // if on the right
+            {
+                // set the parents right to the new Right
+                if(current->getLeft() != NULL)
+                    current->getParent()->setRight(current->getLeft());
+                else if (current->getRight() != NULL)
+                    current->getParent()->setRight(current->getRight());
+
+                // point parents left to parent
+                current->getParent()->getRight()->setParent(current->getParent());
+            }
+            
+            delete current; // delete item
+            size--;
 
             break;
 
-        case 2:
+        case 2: // if item has two children
 
             break;
         default:

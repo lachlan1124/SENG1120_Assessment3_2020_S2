@@ -65,9 +65,34 @@ int main()
 
     removeTest.remove("Alice");
     std::cout << "2. After remove(Alice): " << removeTest << std::endl;
-    
+
     removeTest.remove("Jeff");
     std::cout << "2. After remove: " << removeTest << std::endl;
+
+
+    std::cout << "TEST 3" << std::endl;
+
+    removeTest.add("Jeff");
+    removeTest.add("Alice");
+    removeTest.add("Lachlan");
+    removeTest.add("Beth");
+    removeTest.add("Kat");
+
+    std::cout << "3. Before remove: " << removeTest << std::endl;
+
+    removeTest.remove("Alice");
+    std::cout << "3. After remove(Alice): " << removeTest << std::endl;
+
+        removeTest.remove("Lachlan");
+    std::cout << "3. After remove(Lachlan): " << removeTest << std::endl;
+
+    removeTest.remove("Beth"); // causing seg fault
+    removeTest.remove("Jeff");
+    std::cout << "3. After remove(Beth & Jeff): " << removeTest << std::endl;
+
+    removeTest.remove("Kat");
+
+    std::cout << "3. After remove(all): " << removeTest << std::endl;
 
     /*
     TODO
