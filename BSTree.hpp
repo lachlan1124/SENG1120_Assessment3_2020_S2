@@ -6,12 +6,13 @@
 #include <string>
 #include <sstream>
 
-template<typename valueType> BSTree<valueType>::BSTree() {size = 0;}
+template<typename valueType> BSTree<valueType>::BSTree() {size = 0; root = NULL; current = NULL;}
 
 template<typename valueType> BSTree<valueType>::BSTree(valueType data) 
 {
     root = new BTNode<valueType>(data);
     size = 1;
+    current = root;
 }
 
 template<typename valueType> BSTree<valueType>::~BSTree() {}
