@@ -18,7 +18,7 @@ class BSTree
         void add(valueType data);
         void remove(valueType toRemove);
 
-        void search(valueType toFind);
+        bool search(valueType toFind);
 
         void max();
 

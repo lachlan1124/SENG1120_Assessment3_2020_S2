@@ -81,20 +81,32 @@ template<typename valueType> valueType BSTree<valueType>::getCurrent()
     return current->getData();
 }
 
-template<typename valueType> void BSTree<valueType>::search(valueType toFind)
+template<typename valueType> bool BSTree<valueType>::search(valueType toFind)
 {
 
-    if(current->getData() > toFind)
+    if(current != NULL)
     {
-        moveLeft();
-        search(toFind);
+        if(current->getData() == toFind)
+            return true;
+        else if(current->getData() > toFind)
+        {
+            moveLeft();
+            search(toFind);
+        }
+        else if(current->getData() < toFind)
+        {
+            moveRight();
+            search(toFind);
+        }
+        
+    }
+    else
+    {
+        return false;
+    }
+    
 
-    }
-    else if(current->getData() < toFind)
-    {
-        moveRight();
-        search(toFind);
-    }
+
 }
 
 template<typename valueType> void BSTree<valueType>::max()
@@ -109,89 +121,45 @@ template<typename valueType> void BSTree<valueType>::max()
 
 template<typename valueType> void BSTree<valueType>::remove(valueType toRemove)
 {
-    current = root;
-    search(toRemove);
-
-    int childCount = 0;
-
-    if(current->getLeft() != NULL)
-         childCount++;
-    if(current->getRight() != NULL)
-        childCount++;
-    
-    if(childCount == 0) // if the node has no children
+    if(search(toRemove)) // set current to the item being removed and check if the iteam is in the tree
     {
-        BTNode<valueType>* nodeToRemove = current; // stores the node being delete
- 
-        current = current->getParent(); // move the current up
+        int childCount = 0;
+        bool isRoot = false;
 
-        if(current->getLeft() == nodeToRemove) // is node to remove left
-        {  
-            current->setLeft(NULL); // set left to NULL
-        }
-        else if(current->getRight() == nodeToRemove) // is node to remove right
-        {
-            current->setRight(NULL); // set right to NULL
-        }
+        if (current->getParent() == NULL) // if parent equals Null then node is root
+            isRoot = true;
 
-    
-        delete nodeToRemove; // delete node
-    }
-
-    if(childCount == 1)
-    {
-        BTNode<valueType>* child;
-        // find the child
-        if(current->getLeft() != NULL) // child is left
-            child = current->getLeft();
-        else if(current->getRight() != NULL) // child is right
-            child = current->getRight();
-
-        BTNode<valueType>* nodeToRemove = current; // stores the node being delete
- 
-        current = current->getParent(); // move the current up
-
-        if(current->getLeft() == nodeToRemove) // is node to remove left
-        {  
-            current->setLeft(child); // set left to child
-        }
-        else if(current->getRight() == nodeToRemove) // is node to remove right
-        {
-            current->setRight(child); // set right to child
-        }
-
-    
-        delete nodeToRemove; // delete node
-
-    }
-
-    if(childCount == 2)
-    {
-        BTNode<valueType>* nodeToRemove = current; // stores the node being delete
-
-        moveLeft(); // set current to the left
-
-        max(); // find the max from the current
-
-       current->setRight(nodeToRemove->getRight());
-        current->getParent()->setRight(NULL); // remove current from tree
-       
-
-       // is node delete on left or right?
-        if(nodeToRemove->getParent()->getRight() == nodeToRemove) 
-            nodeToRemove->getParent()->setRight(current); // set parent right to current
-        else if(nodeToRemove->getParent()->getLeft() == nodeToRemove)
-            nodeToRemove->getParent()->setLeft(current); // set parent left to current
+        if (current->getLeft() != NULL)
+            childCount++; // count the child
         
+        if (current->getRight() != NULL)
+            childCount++; // count the child
+
+        switch (childCount)
+        {
+        case 0: // if the item has no children
+            if(isRoot) // if is root
+            {
+                root = NULL;
+                delete current; // delete root
+                size--;
+            }
+
+            
+            break;
+        case 1:
+
+            break;
+
+        case 2:
+
+            break;
+        default:
+            break;
+        }
 
 
-        current->setParent(nodeToRemove->getParent()); // set current parent to remove parent
-        
-        delete nodeToRemove;
-    }
-
-    size--;
-
+    }    
 }
 
 // CHANGE THIS PASS OS TO THIS FUNCTION
