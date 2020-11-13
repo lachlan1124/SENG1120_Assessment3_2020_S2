@@ -215,10 +215,10 @@ template<typename valueType> void BSTree<valueType>::remove(valueType toRemove)
 
         case 2: // if item has two children
             
-            BTNode<valueType>* tmp = current;
+            BTNode<valueType>* nodeToRemove = current;
             valueType data = min(current->getRight())->getData(); // find the min in the right side of the node to delete
             remove(data);
-            tmp->setData(data);
+            nodeToRemove->setData(data);
             break;
         }
 
@@ -258,7 +258,7 @@ template<typename valueType> void BSTree<valueType>::operator+=( BSTree<valueTyp
         valueType item;
 
         ss >> item;
-        if(item == "")
+        if(item != "")
         {
             add(item); // add items
         }

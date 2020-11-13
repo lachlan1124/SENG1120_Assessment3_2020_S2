@@ -1,5 +1,5 @@
 #include "BSTree.h"
-
+#include "HTable.h"
 #include <iostream>
 #include <cstdlib>
 #include <time.h>
@@ -10,6 +10,8 @@ int main()
 {
     BSTree<std::string> tree1;
     BSTree<std::string> tree2;
+	HTable<string> tableValues;
+	HTable<string> tableAux;
 
     BSTree<int> intTree;
 
@@ -140,10 +142,45 @@ int main()
 	cout << "Time per ins/del operation: " << 1000.0*(double)(clock() - t)/(double)(500000*17) << " milliseconds." << endl << endl;
 
 
+    	cout << "==================" << endl << "HASH TABLE" << endl;
+	t = clock(); 																	// gets current time
+	for (int i=0; i<numberOfElements1; i++) {tableValues.add(vectorStudents1[i]);} 	// populates the main hash table.
+	for (int i=0; i<numberOfElements2; i++) {tableAux.add(vectorStudents2[i]);} 	// populates the aux hash table.
+	
+	tableValues += tableAux; 														// tests overloaded += operator
+	
+	cout << "Initial hash table: " << tableValues << endl; 							// prints the contents of the hash table.
+
+	for (int i=0; i<500000; i++)													// add and remove over and over again
+	{ 
+        tableValues.remove("Alex");
+		tableValues.remove("Peter");
+		tableValues.remove("John");
+		tableValues.remove("Pamela");
+		tableValues.remove("Kate");
+		tableValues.remove("Tim");
+		tableValues.remove("Steve");
+		tableValues.remove("Rick");
+		tableValues.remove("Sam");
+        tableValues.add("Alex");
+		tableValues.add("Peter");
+		tableValues.add("John");
+		tableValues.add("Pamela");
+		tableValues.add("Kate");
+		tableValues.add("Tim");
+		tableValues.add("Steve");
+		tableValues.add("Rick");
+	}
+	cout << "Final hash table  : " << tableValues << endl << endl; 					// prints the contents of the hash table.
+	cout << "Time elapsed: " << (clock() - t)/1000.0 << " seconds" << endl; 		// prints elapsed time.
+	cout << "Time per ins/del operation: " << 1000.0*(double)(clock() - t)/(double)(500000*17) << " milliseconds." << endl << endl;
+	cout << "The program has finished." << endl;
+
+
+
     /*
     TODO
-    Overload += for BSTree
-    create HTable
+    DANIEL IS MISSING IN HTABLE!!!!!!!!!!!!!
 
     */
 
