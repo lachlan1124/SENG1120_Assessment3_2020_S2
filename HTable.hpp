@@ -5,16 +5,17 @@
 #include <string>
 #include <sstream>
 
-template<typename valueType> HTable<valueType>::HTable() {hashTable = new valueType[arraySize];size = 0;}
+template<typename valueType> HTable<valueType>::HTable() {hashTable = new valueType[arraySize];size = 0;  std::cout << "Updated" << std::endl;}
 
 template<typename valueType> HTable<valueType>::HTable(valueType item)
 {
     hashTable = new valueType[arraySize];
     size = 0;
     add(item);
+   
 }
 
-template<typename valueType> HTable<valueType>::~HTable() {}
+template<typename valueType> HTable<valueType>::~HTable() {delete[] hashTable;}
 
 template<typename valueType> void HTable<valueType>::add(valueType toAdd)
 {
