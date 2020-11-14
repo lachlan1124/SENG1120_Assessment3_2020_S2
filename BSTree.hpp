@@ -15,7 +15,11 @@ template<typename valueType> BSTree<valueType>::BSTree(valueType data)
     current = root;
 }
 
-template<typename valueType> BSTree<valueType>::~BSTree() {}
+template<typename valueType> BSTree<valueType>::~BSTree() 
+{
+    while(root !=NULL)
+        remove(root->getData());
+}
 
 template<typename valueType> void BSTree<valueType>::add(valueType data)
 {
