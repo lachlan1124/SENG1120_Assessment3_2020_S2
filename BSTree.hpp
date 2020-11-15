@@ -32,46 +32,38 @@ template<typename valueType> void BSTree<valueType>::add(const valueType data)
     }
     else
     {
-        bool inserting = true; 
 
-        current = root;
-
-        while(inserting) // while inserting the data
+        if(current->getData() < data) // if the current is smaller then the data
         {
-            if(current->getData() < data) // if the current is smaller then the data
+            if(current->isRightNULL()) // check if right is null
             {
-                if(current->isRightNULL()) // check if right is null
-                {
-                    BTNode<valueType>* tmp = new BTNode<valueType>(data);
-                    current->setRight(tmp);
-                    tmp->setParent(current); // set the new node parent to current
-                    inserting = false; // end loop
-                }
-                else
-                {
-                    moveRight(); // if right has data move right
-                }
-                
+                BTNode<valueType>* tmp = new BTNode<valueType>(data);
+                current->setRight(tmp);
+                tmp->setParent(current); // set the new node parent to current
             }
-            else if(current->getData() > data) // if current is larger then the data
+            else
             {
-                if(current->isLeftNULL()) // check if left is null
-                {
-                    BTNode<valueType>* tmp = new BTNode<valueType>(data);
-                    current->setLeft(tmp); // if null, set left with data 
-                    tmp->setParent(current); // set the new node parent to current
-                    inserting = false; // end loop
-                }
-                else
-                {
-                    moveLeft(); // move left
-                }
-                
+                moveRight(); // if right has data move right
+                add(data);  // recursive call to add
             }
-            else if(current->getData() == data) { inserting = false;} // if already exist stop looping and do nothing
-
+            
         }
-        
+        else if(current->getData() > data) // if current is larger then the data
+        {
+            if(current->isLeftNULL()) // check if left is null
+            {
+                BTNode<valueType>* tmp = new BTNode<valueType>(data);
+                current->setLeft(tmp); // if null, set left with data 
+                tmp->setParent(current); // set the new node parent to current
+            }
+            else
+            {
+                moveLeft(); // move left
+                add(data); // recursive call to add
+            }
+            
+        }
+
     }
 
     size++;
@@ -253,7 +245,7 @@ template<typename valueType> void BSTree<valueType>::out(std::ostream& os)
 
 template<typename valueType> void BSTree<valueType>::operator+=(BSTree<valueType>& BST)
 {
- 
+    current = root;
 
     std::stringstream ss;
 
