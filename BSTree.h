@@ -12,28 +12,26 @@ class BSTree
     public:
 
         BSTree();
-        BSTree(valueType data);
+        BSTree(const valueType data);
         ~BSTree();
 
-        void add(valueType data);
-        void remove(valueType toRemove);
+        void add(const valueType data);
+        void remove(const valueType toRemove);
 
-        bool search(valueType toFind);
+        bool search(const valueType toFind);
 
         BTNode<valueType>* min(BTNode<valueType>* minRoot);
 
         void out(std::ostream& os);
         void inOrderTraversal(BTNode<valueType>* traversalRoot, std::ostream& os);
 
-        void operator += ( BSTree<valueType>& BST);
+        void operator += (BSTree<valueType>& BST);
 
     private:
 
     void moveRight();
     void moveLeft();
 
-    
- 
     valueType getCurrent();
 
 

@@ -8,7 +8,7 @@
 
 template<typename valueType> BSTree<valueType>::BSTree() {size = 0; root = NULL; current = NULL;}
 
-template<typename valueType> BSTree<valueType>::BSTree(valueType data) 
+template<typename valueType> BSTree<valueType>::BSTree(const valueType data) 
 {
     root = new BTNode<valueType>(data);
     size = 1;
@@ -17,20 +17,22 @@ template<typename valueType> BSTree<valueType>::BSTree(valueType data)
 
 template<typename valueType> BSTree<valueType>::~BSTree() 
 {
-    while(root !=NULL)
-        remove(root->getData());
+    while(root !=NULL) // while items left in BST
+        remove(root->getData()); // remove item
+
+
 }
 
-template<typename valueType> void BSTree<valueType>::add(valueType data)
+template<typename valueType> void BSTree<valueType>::add(const valueType data)
 {
-    if(size == 0)
+    if(size == 0) // if first item
     {
-        root = new BTNode<valueType>(data);
-        current = root;
+        root = new BTNode<valueType>(data); // create the root
+        current = root; // set current to root
     }
     else
     {
-        bool inserting = true;
+        bool inserting = true; 
 
         current = root;
 
@@ -66,7 +68,7 @@ template<typename valueType> void BSTree<valueType>::add(valueType data)
                 }
                 
             }
-            else if(current->getData() == data) { inserting = false;}
+            else if(current->getData() == data) { inserting = false;} // if already exist stop looping and do nothing
 
         }
         
@@ -91,52 +93,53 @@ template<typename valueType> valueType BSTree<valueType>::getCurrent()
     return current->getData();
 }
 
-template<typename valueType> bool BSTree<valueType>::search(valueType toFind)
+template<typename valueType> bool BSTree<valueType>::search(const valueType toFind)
 {
-    if(current != NULL)
+    if(current != NULL) // if current isn't NULL
     {
-        if(current->getData() == toFind)
+        if(current->getData() == toFind) // if current is the data return true
             return true;
-        else if(current->getData() > toFind)
+        else if(current->getData() > toFind) // else if the data is greater then toFind
         {
-            moveLeft();
-            if(!search(toFind))
+            moveLeft(); // move left
+            if(!search(toFind)) // recurive call toFind
                 return false;
             else
                 return true;
             
         }
-        else if(current->getData() < toFind)
+        else if(current->getData() < toFind) // if smaller 
         {
-            moveRight();
-            if(!search(toFind))
+            moveRight(); // move right 
+            if(!search(toFind))  // recurive call toFind
                 return false;
             else
                 return true;
         }
         
     }
-    else
+    else // if not found
     {
         return false;
     }
 }
 
+//finds the min value from the given node
 template<typename valueType> BTNode<valueType>* BSTree<valueType>::min(BTNode<valueType>* minRoot)
 {
-    if(minRoot->getLeft() != NULL)
+    if(minRoot->getLeft() != NULL) // if left is not NULL
     {
-        minRoot = minRoot->getLeft();
-        min(minRoot);
+        minRoot = minRoot->getLeft(); // move root left
+        min(minRoot); // call minRoot
     }
     else
     {
-        return minRoot;
+        return minRoot; // return the min value
     }
 }
 
 
-template<typename valueType> void BSTree<valueType>::remove(valueType toRemove)
+template<typename valueType> void BSTree<valueType>::remove(const valueType toRemove)
 {
     if(search(toRemove)) // set current to the item being removed and check if the iteam is in the tree
     {
@@ -231,25 +234,24 @@ template<typename valueType> void BSTree<valueType>::remove(valueType toRemove)
        
 }
 
-// CHANGE THIS PASS OS TO THIS FUNCTION
 template<typename valueType> void BSTree<valueType>::inOrderTraversal(BTNode<valueType>* traversalRoot, std::ostream& os)
 {
-    if(traversalRoot != NULL)
+    if(traversalRoot != NULL) // if the root is not NULL
     {
-        inOrderTraversal(traversalRoot->getLeft(), os);
-        os <<  traversalRoot->getData() << " "; 
-        inOrderTraversal(traversalRoot->getRight(), os);
+        inOrderTraversal(traversalRoot->getLeft(), os); // traverse left
+        os <<  traversalRoot->getData() << " ";  // add data to the ostream
+        inOrderTraversal(traversalRoot->getRight(), os); // traverse right
     }
 
 } 
 
 template<typename valueType> void BSTree<valueType>::out(std::ostream& os)
 {
-    current = root;
-    inOrderTraversal(current, os);
+    current = root; // set the current to root
+    inOrderTraversal(current, os); // call inOrderTraversal
 }
 
-template<typename valueType> void BSTree<valueType>::operator+=( BSTree<valueType>& BST)
+template<typename valueType> void BSTree<valueType>::operator+=(BSTree<valueType>& BST)
 {
  
 
@@ -261,8 +263,9 @@ template<typename valueType> void BSTree<valueType>::operator+=( BSTree<valueTyp
     {
         valueType item;
 
-        ss >> item;
-        if(item != "")
+        ss >> item; // get item from string stream
+
+        if(item != "") // don't add empty items
         {
             add(item); // add items
         }
