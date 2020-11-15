@@ -25,6 +25,18 @@ template<typename valueType> BSTree<valueType>::~BSTree()
 
 template<typename valueType> void BSTree<valueType>::add(const valueType data)
 {
+    add(data, true);
+}
+
+
+
+
+template<typename valueType> void BSTree<valueType>::add(const valueType data, bool firstCall)
+{
+    if(firstCall)
+        current = root;
+
+
     if(size == 0) // if first item
     {
         root = new BTNode<valueType>(data); // create the root
@@ -44,7 +56,7 @@ template<typename valueType> void BSTree<valueType>::add(const valueType data)
             else
             {
                 moveRight(); // if right has data move right
-                add(data);  // recursive call to add
+                add(data, false);  // recursive call to add
             }
             
         }
@@ -59,7 +71,7 @@ template<typename valueType> void BSTree<valueType>::add(const valueType data)
             else
             {
                 moveLeft(); // move left
-                add(data); // recursive call to add
+                add(data, false); // recursive call to add
             }
             
         }

@@ -16,6 +16,8 @@ class BSTree
         ~BSTree();
 
         void add(const valueType data);
+        void add(const valueType data, bool firstCall);
+
         void remove(const valueType toRemove);
 
         bool search(const valueType toFind);
